@@ -1,1 +1,1 @@
-https://secret-shore-65991.herokuapp.com/api/persons
+https://secret-shore-65991.herokuapp.com
