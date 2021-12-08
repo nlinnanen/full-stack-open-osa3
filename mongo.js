@@ -29,16 +29,16 @@ if (newName && newNumber) {
   })
 
   person
-      .save()
-      .then(response => {
-        console.log(`Added ${response.name} number ${response.number} to phonebook `)
-        mongoose.connection.close()
-      })
+    .save()
+    .then(response => {
+      console.log(`Added ${response.name} number ${response.number} to phonebook `)
+      mongoose.connection.close()
+    })
 } else {
   Person
-      .find({})
-      .then((result) => {
-        result.forEach(console.log)
-        mongoose.connection.close()
-      })
+    .find({})
+    .then((result) => {
+      result.forEach(console.log)
+      mongoose.connection.close()
+    })
 }

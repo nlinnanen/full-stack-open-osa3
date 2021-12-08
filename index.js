@@ -14,7 +14,7 @@ app.use(express.json())
 
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 
-app.use(morgan(":method :url :status :res[content-length] - :response-time ms :body"))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 app.get('/api/persons', (req, res, next) => {
   Person
@@ -40,13 +40,13 @@ app.get('/api/persons/:id', (req, res, next) => {
 
 app.get('/api/info', (req, res, next) => {
   Person
-      .find({})
-      .then(persons =>{
-        res.send(
-          `<p>Phonebook has info for ${persons.length} people</p>` +
+    .find({})
+    .then(persons => {
+      res.send(
+        `<p>Phonebook has info for ${persons.length} people</p>` +
           `<p>${new Date()}</p>`
-        )
-      })
+      )
+    })
 })
 
 app.post('/api/persons', (req, res, next) => {
@@ -58,11 +58,11 @@ app.post('/api/persons', (req, res, next) => {
   })
 
   person
-      .save()
-      .then(savedPerson => {
-        res.status(200).json(savedPerson)
-      })
-      .catch(error => next(error))
+    .save()
+    .then(savedPerson => {
+      res.status(200).json(savedPerson)
+    })
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
@@ -83,11 +83,11 @@ app.put('/api/persons/:id', (req, res, next) => {
 
 app.delete('/api/persons/:id', (req, res, next) => {
   Person
-      .findByIdAndRemove(req.params.id)
-      .then(result => {
-        res.status(204).end()
-      })
-      .catch(error => next(error))
+    .findByIdAndRemove(req.params.id)
+    .then(result => {
+      res.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response, next) => {
@@ -102,8 +102,8 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
-  } else if (error.name == 'ValidationError') {
-    return response.status(400).send({ error: error.message})
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).send({ error: error.message })
   }
 
   next(error)

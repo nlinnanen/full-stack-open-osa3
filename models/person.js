@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-var uniqueValidator = require('mongoose-unique-validator');
+var uniqueValidator = require('mongoose-unique-validator')
 
 const url = process.env.MONGODB_URI
 
@@ -13,27 +13,27 @@ mongoose.connect(url)
   })
 
 const personSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
-      minlength: 3,
-      maxlength: 50,
-      index: {
-        unique: true,
-        partialFilterExpression: { deleted: false }
-      } 
-    },
-    number: {
-      type: String,
-      required: true,
-      minlength: 8,
-      validate: { // oma lisäys: tarkistaa sisältääkö annettu numero numeroita tai + tai -
-        validator: (v) => {
-          return /^[\d-+]+$/.test(v);
-        },
-        message: props => `${props.value} is not a valid phone number!`
-      }
+  name: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 50,
+    index: {
+      unique: true,
+      partialFilterExpression: { deleted: false }
     }
+  },
+  number: {
+    type: String,
+    required: true,
+    minlength: 8,
+    validate: { // oma lisäys: tarkistaa sisältääkö annettu numero numeroita tai + tai -
+      validator: (v) => {
+        return /^[\d-+]+$/.test(v)
+      },
+      message: props => `${props.value} is not a valid phone number!`
+    }
+  }
 })
 
 personSchema.set('toJSON', {
